@@ -5,6 +5,8 @@ def encode(message: str):
     stack: list = []
     multyplier: int = 0
     final_string: str = ''
+    temp_string: str = ''
+    temp_multyplier: int = 0
     for char in message:
         if char.isdigit():
             # Если число не однозначное, предыдущее умножается на 10
@@ -16,8 +18,8 @@ def encode(message: str):
             final_string = ''
         elif char == ']':
             # Собираем финальную строку
-            temp_string: str = ''
-            temp_multyplier: int = 0
+            temp_string = ''
+            temp_multyplier = 0
             temp_string, temp_multyplier = stack.pop()
             final_string = temp_string + temp_multyplier * final_string
         else:
@@ -25,4 +27,4 @@ def encode(message: str):
     return final_string
 
 
-print(encode(message))
+print(encode('10[a]'))
