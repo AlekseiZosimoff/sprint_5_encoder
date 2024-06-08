@@ -1,13 +1,11 @@
-message = input()
+import string
 
 
-def encode(message: str = '10[2[ba]]'):
+def encode(message: str):
     stack: list = []
-    final_string: str = ''
-    temp_string: str = ''
-    multyplier: str = ''
+    final_string, multyplier = '', ''
     for char in message:
-        if char.isdigit():
+        if char in set(string.digits):
             # Если число не однозначное, предыдущее умножается на 10
             multyplier += char
         elif char == '[':
@@ -17,8 +15,6 @@ def encode(message: str = '10[2[ba]]'):
             final_string = ''
         elif char == ']':
             # Собираем финальную строку
-            temp_string = ''
-            temp_multyplier = 0
             temp_string, temp_multyplier = stack.pop()
             final_string = temp_string + temp_multyplier * final_string
         else:
@@ -27,7 +23,8 @@ def encode(message: str = '10[2[ba]]'):
 
 
 def main():
-    print(encode())
+    message = input()
+    print(encode(message))
 
 
 if __name__ == '__main__':
